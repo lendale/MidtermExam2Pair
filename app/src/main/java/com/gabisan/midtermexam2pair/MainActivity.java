@@ -8,7 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.gabisan.midtermexam2pair.Fragment.ListViewFragment;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private ListViewFragment mListViewFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mListViewFragment = ListViewFragment.newInstance();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, mListViewFragment)
+                .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
