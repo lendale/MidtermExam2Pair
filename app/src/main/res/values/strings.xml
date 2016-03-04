@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MidtermExam2Pair</string>
     <string name="action_refresh">Refresh</string>
+    <string name="progress_getting_books">Getting Books...</string>
 </resources>
