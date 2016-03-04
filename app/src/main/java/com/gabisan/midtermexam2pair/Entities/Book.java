@@ -14,6 +14,13 @@ public class Book {
     public Book() {
     }
 
+    public Book(String mTitle, String mGenre, String mAuthor, Boolean mIsRead) {
+        this.mTitle = mTitle;
+        this.mGenre = mGenre;
+        this.mAuthor = mAuthor;
+        this.mIsRead = mIsRead;
+    }
+
     public Book(String mId, String mTitle, String mGenre, String mAuthor, Boolean mIsRead) {
         this.mId = mId;
         this.mTitle = mTitle;
