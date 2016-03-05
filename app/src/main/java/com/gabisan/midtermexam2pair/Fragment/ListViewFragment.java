@@ -74,7 +74,8 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
-//        intent.putExtra("Position", position);
+        intent.putExtra("Position", position);
+//        intent.putExtra("ID", books.get(position).getmId());
         startActivity(intent);
     }
 
