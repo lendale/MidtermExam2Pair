@@ -1,5 +1,6 @@
 package com.gabisan.midtermexam2pair.Fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 
 import com.gabisan.midtermexam2pair.APIs.BookApi;
 import com.gabisan.midtermexam2pair.Adapters.BookAdapter;
+import com.gabisan.midtermexam2pair.BookDetailsActivity;
 import com.gabisan.midtermexam2pair.Entities.Book;
 import com.gabisan.midtermexam2pair.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
     private TextView mTvGettingBooks;
     private ProgressBar mProgBar;
 
-    private List<Book> Libro = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
     private BookAdapter adapter;
 
 
@@ -41,8 +44,7 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        FetchBook fb= new FetchBook();
+        FetchBooks fb= new FetchBooks();
         fb.execute();
 
     }
@@ -61,11 +63,10 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
         mProgBar = (ProgressBar) view.findViewById(R.id.progressBarLoadingBooks);
 
         // create a new instance of adapter
-        adapter = new BookAdapter(getActivity(), R.layout.list_item, Libro);
+        adapter = new BookAdapter(getActivity(), R.layout.list_item, books);
 
         // set the adapter
         mListView.setAdapter(adapter);
-
 
         // set item click listener
         mListView.setOnItemClickListener(this);
@@ -73,19 +74,16 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
+        intent.putExtra("Position", position);
+        startActivity(intent);
     }
 
 
-    public class FetchBook extends AsyncTask<String, Void, List<Book>> {
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
+    public class FetchBooks extends AsyncTask<String, Void, List<Book>> {
 
         @Override
         protected List<Book> doInBackground(String... params) {
-
             return BookApi.getBooks();
         }
 

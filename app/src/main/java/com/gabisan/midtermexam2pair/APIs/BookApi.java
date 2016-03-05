@@ -66,4 +66,47 @@ public class BookApi {
         return booksList;
     }
 
+    public static Book getBook(String id) {
+        String json = HttpUtils.GET(API_URL + "/" + id);
+
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+
+        //Parse the json response and convert it into a Book object
+        String bookId;
+        String bookTitle;
+        String bookGenre;
+        String bookAuthor;
+        Boolean bookIsRead;
+
+        JSONArray jsonArray;
+
+        JSONObject jsonObject;
+
+        Book book;
+
+        try {
+            jsonArray = new JSONArray(json);
+            Log.d("JSON ARRAY SIZE", "" + jsonArray.length());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
+
+                if (jsonObject.getString(B_ID).equals(id)) {
+                    bookId = jsonObject.getString(B_ID);
+                    bookTitle = jsonObject.getString(B_TITLE);
+                    bookGenre = jsonObject.getString(B_GENRE);
+                    bookAuthor = jsonObject.getString(B_AUTHOR);
+                    bookIsRead = jsonObject.getBoolean(B_ISREAD);
+
+                    book = new Book(bookId, bookTitle, bookGenre, bookAuthor, bookIsRead);
+
+                    return book;
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

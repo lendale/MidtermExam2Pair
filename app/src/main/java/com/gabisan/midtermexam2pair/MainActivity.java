@@ -55,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            return true;
+            mListViewFragment = ListViewFragment.newInstance();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(mListViewFragment)
+                    .attach(mListViewFragment)
+                    .commit();
         }
 
         return super.onOptionsItemSelected(item);
