@@ -4,13 +4,12 @@
     <string name="progress_getting_books">Getting Books...</string>
     <string name="action_search">Search</string>
     <string name="hasBeenRead">Has been read?</string>
-    <string name="search" />
+    <string name="search">Search</string>
 
     <string-array name="option">
 
         <item>Search</item>
         <item>Author</item>
 
-
-        </string-array>
+    </string-array>
 </resources>

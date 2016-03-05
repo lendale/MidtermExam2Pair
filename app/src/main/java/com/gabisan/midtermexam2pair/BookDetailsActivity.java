@@ -50,6 +50,8 @@ public class BookDetailsActivity extends AppCompatActivity {
             throw new IllegalArgumentException("position passed is invalid.");
         }
 
+        mId = intent.getString("ID");
+        Log.d("ID", "" + mId);
 //        mBook = mBookList.get(position);
 
 //        if (mBook == null) {
@@ -94,22 +96,22 @@ public class BookDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class getBookDetail extends AsyncTask<String, Void, List<Book>> {
+    public class getBookDetail extends AsyncTask<String, Void, Book> {
 
         @Override
-        protected List<Book> doInBackground(String... params) {
-            return BookApi.getBooks();
+        protected Book doInBackground(String... params) {
+            return BookApi.getBook(mId);
         }
 
         @Override
-        protected void onPostExecute(List<Book> books) {
-            super.onPostExecute(books);
+        protected void onPostExecute(Book book) {
+            super.onPostExecute(book);
 
-            getSupportActionBar().setTitle(books.get(position).getmTitle());
-            mEtBookTitle.setText(books.get(position).getmTitle());
-            mEtBookGenre.setText(books.get(position).getmGenre());
-            mEtBookAuthor.setText(books.get(position).getmAuthor());
-            if (books.get(position).getmIsRead()) {
+            getSupportActionBar().setTitle(book.getmTitle());
+            mEtBookTitle.setText(book.getmTitle());
+            mEtBookGenre.setText(book.getmGenre());
+            mEtBookAuthor.setText(book.getmAuthor());
+            if (book.getmIsRead()) {
                 mReadChkBox.setChecked(true);
             }
         }

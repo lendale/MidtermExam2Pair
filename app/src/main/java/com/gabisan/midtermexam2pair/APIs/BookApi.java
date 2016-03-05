@@ -20,6 +20,7 @@ public class BookApi {
 
     public static final String API_URL = "http://joseniandroid.herokuapp.com/api/books";
 
+    private static final String B_RESULT = "result";
     private static final String B_ID = "_id";
     private static final String B_TITLE = "title";
     private static final String B_GENRE = "genre";
@@ -82,28 +83,21 @@ public class BookApi {
 
         JSONArray jsonArray;
 
-        JSONObject jsonObject;
+        JSONObject jsonObject, result;
 
         Book book;
 
         try {
-            jsonArray = new JSONArray(json);
-            Log.d("JSON ARRAY SIZE", "" + jsonArray.length());
-            for (int i = 0; i < jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
+            jsonObject = new JSONObject(json);
 
-                if (jsonObject.getString(B_ID).equals(id)) {
-                    bookId = jsonObject.getString(B_ID);
-                    bookTitle = jsonObject.getString(B_TITLE);
-                    bookGenre = jsonObject.getString(B_GENRE);
-                    bookAuthor = jsonObject.getString(B_AUTHOR);
-                    bookIsRead = jsonObject.getBoolean(B_ISREAD);
+            result = jsonObject.getJSONObject(B_RESULT);
+            bookId = result.getString(B_ID);
+            bookTitle = result.getString(B_TITLE);
+            bookGenre = result.getString(B_GENRE);
+            bookAuthor = result.getString(B_AUTHOR);
+            bookIsRead = result.getBoolean(B_ISREAD);
 
-                    book = new Book(bookId, bookTitle, bookGenre, bookAuthor, bookIsRead);
-
-                    return book;
-                }
-            }
+            return new Book(bookId, bookTitle, bookGenre, bookAuthor, bookIsRead);
         } catch (JSONException e) {
             e.printStackTrace();
         }
