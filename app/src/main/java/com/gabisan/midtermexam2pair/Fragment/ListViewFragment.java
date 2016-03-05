@@ -19,7 +19,6 @@ import com.gabisan.midtermexam2pair.BookDetailsActivity;
 import com.gabisan.midtermexam2pair.Entities.Book;
 import com.gabisan.midtermexam2pair.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
-        intent.putExtra("Position", position);
+//        intent.putExtra("Position", position);
         startActivity(intent);
     }
 
